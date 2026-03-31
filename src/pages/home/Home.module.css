@@ -1,0 +1,8 @@
+.postCard {
+  border: 2px grey solid;
+}
+.outer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}

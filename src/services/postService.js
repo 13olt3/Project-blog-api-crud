@@ -1,4 +1,5 @@
 import axios from "axios";
+import api from "./api";
 
 const API_URL = "http://localhost:3030/api/posts";
 const API_URL_LOGIN = "http://localhost:3030/api/users/login";
@@ -27,19 +28,29 @@ export const loginUser = async (username, password) => {
   }
 };
 
-export const postBlog = async (title, body, config) => {
+// export const postBlog = async (title, body, config) => {
+//   try {
+//     const response = await axios.post(
+//       API_URL_POST_BLOG,
+//       {
+//         title: title,
+//         body: body,
+//       },
+//       config,
+//     );
+//     return response.data;
+//   } catch (error) {
+//     console.log("Error fetching posts:", error);
+//     throw error;
+//   }
+// };
+
+export const postBlog = async (title, body) => {
   try {
-    const response = await axios.post(
-      API_URL_POST_BLOG,
-      {
-        title: title,
-        body: body,
-      },
-      config,
-    );
+    const response = await api.post("/posts", { title: title, body: body });
     return response.data;
   } catch (error) {
-    console.log("Error fetching posts:", error);
+    console.log("Error creating post:", error);
     throw error;
   }
 };

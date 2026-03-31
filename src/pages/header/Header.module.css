@@ -1,0 +1,8 @@
+.list {
+  padding: 0;
+  list-style: none;
+}
+.header {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+}
