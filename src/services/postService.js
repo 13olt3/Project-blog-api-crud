@@ -54,3 +54,13 @@ export const postBlog = async (title, body) => {
     throw error;
   }
 };
+
+export const getSinglePost = async (postId) => {
+  try {
+    const response = await api.get(`/posts/${postId}`);
+    return response.data;
+  } catch (error) {
+    console.log("Error creating post:", error);
+    throw error;
+  }
+};
