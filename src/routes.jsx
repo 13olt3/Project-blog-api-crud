@@ -4,6 +4,7 @@ import Login from "./pages/login/login";
 import Create from "./pages/create/create";
 import Home from "./pages/home/home";
 import Post from "./pages/posts/posts";
+import Signup from "./pages/signup/signup";
 
 const routes = [
   {
@@ -25,6 +26,10 @@ const routes = [
       {
         path: "/posts/:id",
         element: <Post />,
+      },
+      {
+        path: "/signup",
+        element: <Signup />,
       },
     ],
   },

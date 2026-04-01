@@ -1,18 +1,28 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+
 import styles from "./Header.module.css";
 
-function Header() {
+function Header({ user, onLogout }) {
+  const navigate = useNavigate();
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Create Post", path: "/create" },
-    { name: "Login", path: "/login" },
   ];
+  const authLinks = [
+    { name: "Login", path: "/login" },
+    { name: "Logout", path: "/" },
+  ];
+  function clickLogout() {
+    onLogout();
+    navigate("/");
+  }
+
   const username = localStorage.getItem("username");
   return (
     <div className={styles.header}>
-      <div></div>
+      <div> BLOG API</div>
       <nav>
-        <div>Username:{username}</div>
+        <div>{username ? `Username: ${username}` : "Not logged in."}</div>
         <ul className={styles.list}>
           {" "}
           {navLinks.map((eachLink) => (
@@ -20,6 +30,18 @@ function Header() {
               <Link to={eachLink.path}>{eachLink.name}</Link>
             </li>
           ))}
+          <li key="auth">
+            {user ? (
+              <button
+                onClick={(e) => clickLogout(e)}
+                className={styles.linkStyle}
+              >
+                Logout
+              </button>
+            ) : (
+              <Link to={"/login"}>Login</Link>
+            )}
+          </li>
         </ul>
       </nav>
     </div>

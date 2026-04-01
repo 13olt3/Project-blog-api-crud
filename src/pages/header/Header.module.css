@@ -7,3 +7,13 @@
   grid-template-columns: 4fr 1fr;
   border-bottom: solid 1px #9ca3af;
 }
+
+.linkStyle {
+  background: none;
+  border: none;
+  padding: 0;
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+  color: rgb(208, 173, 240);
+}

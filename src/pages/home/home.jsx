@@ -24,6 +24,7 @@ function Home() {
             <div> {eachPost.title}</div>
             <div>
               <p>Body:{eachPost.body}</p>
+              <p>Written by: {eachPost.user.username}</p>
               <Link to={`posts/${eachPost.id}`}>
                 Comments: {eachPost._count.comments}
               </Link>
