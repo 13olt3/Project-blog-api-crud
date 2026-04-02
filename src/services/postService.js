@@ -51,3 +51,26 @@ export const getSinglePost = async (postId) => {
     throw error;
   }
 };
+
+export const addNewComment = async (postId, comment) => {
+  try {
+    const response = await api.post(`/posts/${postId}`, { comment: comment });
+    return response.data;
+  } catch (error) {
+    console.log("Error posting comment:", error);
+    throw error;
+  }
+};
+
+export const editComment = async (commentId, comment) => {
+  try {
+    const response = await api.put(`/posts/comment/${commentId}`, {
+      commentId: commentId,
+      comment: comment,
+    });
+    return response.data;
+  } catch (error) {
+    console.log("Error posting comment:", error);
+    throw error;
+  }
+};
