@@ -47,10 +47,10 @@ function Posts() {
   function editPostButton() {
     setEditPost(!editPost);
   }
-  function handleDeletePost() {
+  async function handleDeletePost() {
     const isConfirmed = window.confirm("Are you sure you want to delete?");
     if (isConfirmed) {
-      deletePost(id);
+      await deletePost(id);
     }
     navigate("/", { state: { refreshed: true } });
   }

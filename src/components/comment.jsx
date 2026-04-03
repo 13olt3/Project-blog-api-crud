@@ -12,10 +12,10 @@ function Comment({ commentData }) {
   function editCommentButton() {
     setEditComment(!editComment);
   }
-  function handleDeleteComment() {
+  async function handleDeleteComment() {
     const isConfirmed = window.confirm("Are you sure you want to delete?");
     if (isConfirmed) {
-      deleteComment(commentData.id);
+      await deleteComment(commentData.id);
     }
     navigate(0, { state: { refreshed: true } });
   }
