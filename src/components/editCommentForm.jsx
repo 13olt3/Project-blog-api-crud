@@ -1,6 +1,6 @@
-import styles from "./CommentForm.module.css";
+import styles from "./Comment.module.css";
 import { editComment } from "../services/postService.js";
-import { useParams, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 function EditComment({ commentId, cancelEdit }) {
   const navigate = useNavigate();
@@ -18,8 +18,14 @@ function EditComment({ commentId, cancelEdit }) {
     <>
       {" "}
       <form onSubmit={handleEdit} className={styles.form}>
-        <label>Comment:</label>
-        <textarea rows="10" cols="40" type="text" name="comment" />
+        <label htmlFor="editComment">Comment:</label>
+        <textarea
+          id="editComment"
+          rows="10"
+          cols="40"
+          type="text"
+          name="comment"
+        />
         <button type="submit">submit change</button>
         <button onClick={cancelEdit}>Cancel edit</button>
       </form>

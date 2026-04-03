@@ -1,9 +1,9 @@
-import { useParams, Link } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
-import styles from "./Posts.module.css";
-import { getSinglePost } from "../../services/postService.js";
+
+import { getSinglePost, deletePost } from "../../services/postService.js";
 import CommentForm from "../../components/commentForm";
-import EditComment from "../../components/editCommentForm";
+import EditPost from "../../components/editPostForm";
 import Comment from "../../components/comment";
 
 function Posts() {
@@ -11,29 +11,61 @@ function Posts() {
   const [post, setPost] = useState(null);
   const [addComment, setAddComment] = useState(false);
   const [editPost, setEditPost] = useState(false);
+  const [error, setError] = useState(null);
 
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    getSinglePost(id).then((data) => {
-      setPost(data.post);
+    setError(null);
 
-      setLoading(false);
-    });
+    getSinglePost(id)
+      .then((data) => {
+        setPost(data.post);
+      })
+      .catch((err) => {
+        if (err.response?.status === 401) {
+          setError("Log in to view this post.");
+        } else {
+          setError("An error occured, try again later.");
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, [id]);
 
   if (loading) {
     return <div>Loading...</div>;
   }
+  if (error) {
+    return <div>{error}</div>;
+  }
   function addCommentButton() {
     setAddComment(!addComment);
   }
-
+  function editPostButton() {
+    setEditPost(!editPost);
+  }
+  function handleDeletePost() {
+    const isConfirmed = window.confirm("Are you sure you want to delete?");
+    if (isConfirmed) {
+      deletePost(id);
+    }
+    navigate("/", { state: { refreshed: true } });
+  }
   return (
     <div>
       <p>Title: {post.title}</p>
       <p>Body: {post.body}</p>
       <p>Posted at: {post.time}</p>
+      {!editPost && post.user.username === localStorage.getItem("username") && (
+        <button onClick={editPostButton}>Edit post</button>
+      )}
+      {editPost && <EditPost postId={id} cancelEdit={editPostButton} />}
+      {post.user.username === localStorage.getItem("username") && (
+        <button onClick={handleDeletePost}>DeletePost</button>
+      )}
       <button onClick={addCommentButton}>
         {addComment ? "Cancel" : "Add new comment"}
       </button>
@@ -41,7 +73,7 @@ function Posts() {
       <div>
         comments:
         {post.comments.map((eachComment) => {
-          return <Comment commentData={eachComment} />;
+          return <Comment key={eachComment.id} commentData={eachComment} />;
         })}
       </div>
       <p></p>

@@ -2,4 +2,39 @@
   border-bottom: 2px solid grey;
   margin-bottom: 10px;
   border-left: 2px solid grey;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 5fr;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  place-content: center;
+  place-items: center;
+  flex-grow: 1;
+  grid-column: 2/3;
+  grid-row: 2/4;
+}
+
+.commentBody {
+  grid-column: 1/4;
+  grid-row: 1/2;
+}
+.commentAuthor {
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+.commentTime {
+  grid-column: 3/4;
+  grid-row: 2/3;
+}
+
+.editComment {
+  grid-column: 2/3;
+  grid-row: 3/4;
+  align-self: center;
+  justify-self: center;
+  width: fit-content;
+  height: fit-content;
 }

@@ -17,7 +17,7 @@ function Create() {
   return (
     <>
       {" "}
-      <form onSubmit={handleComment} className={styles.form}>
+      <form onSubmit={handleComment}>
         <label>Comment:</label>
         <textarea rows="10" cols="40" type="text" name="body" />
         <button type="submit">Add comment</button>

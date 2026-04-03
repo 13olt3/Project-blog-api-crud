@@ -47,7 +47,7 @@ export const getSinglePost = async (postId) => {
     const response = await api.get(`/posts/${postId}`);
     return response.data;
   } catch (error) {
-    console.log("Error creating post:", error);
+    console.log("Error getting post:", error);
     throw error;
   }
 };
@@ -70,7 +70,39 @@ export const editComment = async (commentId, comment) => {
     });
     return response.data;
   } catch (error) {
-    console.log("Error posting comment:", error);
+    console.log("Error editing comment:", error);
+    throw error;
+  }
+};
+
+export const editPost = async (postId, title, body) => {
+  try {
+    const response = await api.put(`/posts/${postId}`, {
+      title: title,
+      body: body,
+    });
+    return response.data;
+  } catch (error) {
+    console.log("Error editing post:", error);
+    throw error;
+  }
+};
+
+export const deletePost = async (postId) => {
+  try {
+    const response = await api.delete(`/posts/${postId}`);
+    return response.data;
+  } catch (error) {
+    console.log("Error deleteing post:", error);
+    throw error;
+  }
+};
+export const deleteComment = async (commentId) => {
+  try {
+    const response = await api.delete(`/posts/comment/${commentId}`);
+    return response.data;
+  } catch (error) {
+    console.log("Error comment post:", error);
     throw error;
   }
 };

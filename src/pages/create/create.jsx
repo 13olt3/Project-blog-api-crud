@@ -1,13 +1,16 @@
 import { postBlog } from "../../services/postService.js";
 import styles from "./Create.module.css";
+import { useNavigate } from "react-router";
 
 function Create() {
+  const navigate = useNavigate();
   async function handlePost(e) {
     e.preventDefault();
     const title = e.target.title.value;
     const body = e.target.body.value;
 
     const result = await postBlog(title, body);
+    navigate("/");
     console.log(result);
   }
 
