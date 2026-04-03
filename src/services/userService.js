@@ -1,8 +1,7 @@
 import axios from "axios";
-import api from "./api";
 
-const API_URL_LOGIN = "http://localhost:3030/api/users/login";
-const API_URL_CREATE = "http://localhost:3030/api/users/";
+const API_URL_LOGIN = import.meta.env.VITE_API_URL_LOGIN;
+const API_URL_CREATE = import.meta.env.VITE_API_URL_CREATE;
 
 export const loginUser = async (username, password) => {
   try {

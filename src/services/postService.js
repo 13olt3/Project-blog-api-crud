@@ -1,9 +1,7 @@
 import axios from "axios";
 import api from "./api";
 
-const API_URL = "http://localhost:3030/api/posts";
-
-const API_URL_POST_BLOG = "http://localhost:3030/api/posts";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const getPosts = async () => {
   try {
